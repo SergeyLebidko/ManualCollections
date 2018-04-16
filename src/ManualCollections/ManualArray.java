@@ -12,7 +12,6 @@ public class ManualArray<E> implements Iterable<E>{
 
     private final int STEP_RESIZE=10;    //Массив при необходимости будет уменьшаться или увеличиваться на данное количество элементов
 
-
     public ManualArray() {
         startSize = 5;
         pointer = -1;
@@ -56,11 +55,23 @@ public class ManualArray<E> implements Iterable<E>{
         resize();
     }
 
+    //Возвращает текущий размер массива
+    public int size(){
+        return pointer+1;
+    }
+
+    //Очищает массив
+    public void clear(){
+        startSize = 5;
+        pointer = -1;
+        a = new Object[startSize];
+    }
+
     //Метод изменяет размер массива
     private void resize() {
         //Если массив заполнен - добавляем к нему STEP_RESIZE элементов
         if (pointer==(a.length-1)){
-            a=Arrays.copyOf(a, startSize+STEP_RESIZE);
+            a=Arrays.copyOf(a, a.length+STEP_RESIZE);
             return;
         }
 
