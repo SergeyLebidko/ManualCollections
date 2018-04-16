@@ -2,6 +2,7 @@ package ManualCollections;
 
 import java.util.Iterator;
 
+//Класс реализует связный список
 class ManualList<E> implements Iterable<E> {
 
     private Element<E> first;    //Первый элемент списка
@@ -81,8 +82,8 @@ class ManualList<E> implements Iterable<E> {
 
     //Метод возвращает произвольный элемент списка
     public E get(int i){
-        if(isEmpty())return null;
-        if((i<0) | (i>size))return null;
+        if(isEmpty())throw new IndexOutOfBoundsException();
+        if((i<0) | (i>size)) throw new IndexOutOfBoundsException();
         int j=-1;
         for (E e:this){
             j++;
