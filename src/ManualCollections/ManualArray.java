@@ -67,6 +67,11 @@ public class ManualArray<E> implements Iterable<E>{
         a = new Object[startSize];
     }
 
+    //Возвращает true, если массив пуст
+    public boolean isEmpty(){
+        return size()==0;
+    }
+
     //Метод изменяет размер массива
     private void resize() {
         //Если массив заполнен - добавляем к нему STEP_RESIZE элементов

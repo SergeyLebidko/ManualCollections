@@ -46,6 +46,14 @@ public class MainClass {
         for (String s: aml) System.out.println(s);
         System.out.println();
 
+        System.out.println("Создаем новый массив на основе старого");
+        ManualArray<String> aml2=new ManualArray<>(aml);
+        System.out.println("Содержимое нового массива "+aml2);
+        System.out.println("Очищаем новый массив");
+        aml.clear();
+        System.out.println(aml.isEmpty()?"Массив очищен":"В массиве остались элементы");
+        System.out.println();
+
         System.out.println("----- Тестирование связного списка -----");
         System.out.println();
 
