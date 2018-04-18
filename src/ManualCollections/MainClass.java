@@ -2,7 +2,7 @@ package ManualCollections;
 
 public class MainClass {
 
-    public static void main(String[] args) {
+    private static void testArr(){
         System.out.println("----- Тестирование массива переменной длины -----");
         System.out.println();
 
@@ -53,7 +53,9 @@ public class MainClass {
         aml.clear();
         System.out.println(aml.isEmpty()?"Массив очищен":"В массиве остались элементы");
         System.out.println();
+    }
 
+    private static void testList(){
         System.out.println("----- Тестирование связного списка -----");
         System.out.println();
 
@@ -62,27 +64,27 @@ public class MainClass {
         sml.addLast("A");
         sml.addLast("B");
         sml.addLast("C");
-        System.out.println("Размер " + sml.getSize());
+        System.out.println("Размер " + sml.size());
         System.out.println("Содержимое " + sml.toString());
 
         System.out.println("Удалаем элементы по одному из начала списка");
         sml.removeLast();
-        System.out.println("Размер " + sml.getSize());
+        System.out.println("Размер " + sml.size());
         System.out.println("Содержимое " + sml.toString());
         sml.removeLast();
-        System.out.println("Размер " + sml.getSize());
+        System.out.println("Размер " + sml.size());
         System.out.println("Содержимое " + sml.toString());
         sml.removeFirst();
-        System.out.println("Размер " + sml.getSize());
+        System.out.println("Размер " + sml.size());
         System.out.println("Содержимое " + sml.toString());
         System.out.println();
 
         System.out.println("Заполняем список символами латинского алфавита");
         for (char a='A';a<='Z'; a++)sml.addLast(""+a);
-        System.out.println("Размер "+sml.getSize());
+        System.out.println("Размер "+sml.size());
         System.out.println("Содержимое "+sml);
         for (char a='z';a>='a'; a--)sml.addFirst(""+a);
-        System.out.println("Размер "+sml.getSize());
+        System.out.println("Размер "+sml.size());
         System.out.println("Содержимое "+sml);
         System.out.println("Пeрвый элемент "+sml.getFirst());
         System.out.println("Последний элемент "+sml.getLast());
@@ -91,13 +93,13 @@ public class MainClass {
         System.out.println("Удаляем по десять элементов в начале и в конце списка. Выводим на экран удаленные элементы");
         for (int i=0;i<10;i++) System.out.println("Удален элемент "+sml.removeFirst());
         for (int i=0;i<10;i++) System.out.println("Удален элемент "+sml.removeLast());
-        System.out.println("Новый размер "+sml.getSize());
+        System.out.println("Новый размер "+sml.size());
         System.out.println("Новое содержимое "+sml);
         System.out.println();
 
         System.out.println("Очищаем список");
         sml.clear();
-        System.out.println("Список очищен размер списка "+sml.getSize());
+        System.out.println("Список очищен размер списка "+sml.size());
         System.out.println();
 
         System.out.println("Снова заполняем список элементами");
@@ -117,7 +119,11 @@ public class MainClass {
         ManualList<String> sml2=new ManualList<>(sml);
         System.out.println("Содержимое нового списка "+sml2);
         System.out.println();
+    }
 
+    public static void main(String[] args) {
+        testArr();
+        testList();
     }
 
 }

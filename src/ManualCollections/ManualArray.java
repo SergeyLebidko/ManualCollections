@@ -46,6 +46,12 @@ public class ManualArray<E> implements Iterable<E>{
         return e;
     }
 
+    //Метод устанавливает значения элемента i
+    public void set(E e, int i){
+        if ((i < 0) | (i > pointer)) throw new IndexOutOfBoundsException();
+        a[i]=e;
+    }
+
     //Метод вставляет элемент в массив в позицию i
     public void insert(E e, int i){
         if ((i < 0) | (i > pointer)) throw new IndexOutOfBoundsException();

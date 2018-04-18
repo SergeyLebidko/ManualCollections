@@ -7,17 +7,17 @@ class ManualList<E> implements Iterable<E> {
 
     private Element<E> first;    //Первый элемент списка
     private Element<E> last;     //Последний элемент списка
-    private int size;            //Размер списка
+    private int sizeList;            //Размер списка
 
     public ManualList() {
         first = null;
         last = null;
-        size = 0;
+        sizeList = 0;
     }
 
-    public ManualList(ManualList<? extends E> list){
+    public ManualList(ManualList<? extends E> list) {
         this();
-        for (E e: list)this.addLast(e);
+        for (E e : list) this.addLast(e);
     }
 
     //Вспомогательный внутренний класс для хранения данных
@@ -39,7 +39,7 @@ class ManualList<E> implements Iterable<E> {
     private void addInEmptyList(E e) {
         first = new Element<>(e);
         last = first;
-        size = 1;
+        sizeList = 1;
     }
 
     //Метод добавляет элемент в начало списка
@@ -52,7 +52,7 @@ class ManualList<E> implements Iterable<E> {
         n.next = first;
         first.prev = n;
         first = n;
-        size++;
+        sizeList++;
     }
 
     //Метод добавляет элемент в конец списка
@@ -65,7 +65,7 @@ class ManualList<E> implements Iterable<E> {
         last.next = n;
         n.prev = last;
         last = n;
-        size++;
+        sizeList++;
     }
 
     //Метод возвращает первый элемент списка
@@ -81,18 +81,36 @@ class ManualList<E> implements Iterable<E> {
     }
 
     //Метод возвращает произвольный элемент списка
-    public E get(int i){
-        if(isEmpty())throw new IndexOutOfBoundsException();
-        if((i<0) | (i>size)) throw new IndexOutOfBoundsException();
-        int j=-1;
-        for (E e:this){
+    public E get(int i) {
+        if (isEmpty()) throw new IndexOutOfBoundsException();
+        if ((i < 0) | (i >= sizeList)) throw new IndexOutOfBoundsException();
+        int j = -1;
+        for (E e : this) {
             j++;
-            if (j==i)return e;
+            if (j == i) return e;
         }
         return null;
     }
 
-    //Метод возвращает первый элемент из списка, удаляя его
+    //Метод возвращает произвольный элемент из списка, удаляя его. Если список пуст - возвращается null
+    public E remove(int i) {
+        if (isEmpty()) throw new IndexOutOfBoundsException();
+        if ((i < 0) | (i > (size() - 1))) throw new IndexOutOfBoundsException();
+        if (i == 0) {
+            sizeList--;
+            return removeFirst();
+        }
+        if (i == (size() - 1)) {
+            sizeList--;
+            return removeLast();
+        }
+
+        //Вставить код удаления не начального (не конечного) элемента
+
+        return null;
+    }
+
+    //Метод возвращает первый элемент из списка, удаляя его. Если список пуст - возвращается null
     public E removeFirst() {
         if (isEmpty()) return null;
         E n = first.content;
@@ -102,10 +120,11 @@ class ManualList<E> implements Iterable<E> {
         } else
             first = first.next;
         if (first != null) first.prev = null;
-        size--;
+        sizeList--;
         return n;
     }
 
+    //Метод возвращает последний элемент из списка, удаляя его. Если список пуст - возвращается null
     public E removeLast() {
         if (isEmpty()) return null;
         E n = last.content;
@@ -115,25 +134,25 @@ class ManualList<E> implements Iterable<E> {
         } else
             last = last.prev;
         if (last != null) last.next = null;
-        size--;
+        sizeList--;
         return n;
     }
 
     //Метод возвращает размер списка
-    public int getSize() {
-        return size;
+    public int size() {
+        return sizeList;
     }
 
     //Метод возвращает true, если список пуст
     public boolean isEmpty() {
-        return size == 0;
+        return sizeList == 0;
     }
 
     //Метод очищает список
-    public void clear(){
-        first=null;
-        last=null;
-        size=0;
+    public void clear() {
+        first = null;
+        last = null;
+        sizeList = 0;
     }
 
     @Override
