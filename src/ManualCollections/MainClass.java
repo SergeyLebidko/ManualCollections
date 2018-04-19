@@ -119,11 +119,34 @@ public class MainClass {
         ManualList<String> sml2=new ManualList<>(sml);
         System.out.println("Содержимое нового списка "+sml2);
         System.out.println();
+
+        System.out.println("Удаляем два элемента из середины нового списка");
+        sml2.remove(1);
+        sml2.remove(2);
+        System.out.println("Содержимое списка "+sml2);
+        System.out.println("Удаляем еще два элемента");
+        sml2.remove(0);
+        sml2.remove(1);
+        System.out.println("Новый список "+sml2);
+        System.out.println();
+
+    }
+
+    private static void testSet(){
+        System.out.println("----- Тестирование множества -----");
+        ManualSet<String> mss=new ManualSet<>();
+        mss.add("A");
+        mss.add("B");
+        mss.add("C");
+        mss.add("D");
+        mss.add("E");
+        System.out.println("Множество создано. Его содержимое "+mss);
     }
 
     public static void main(String[] args) {
         testArr();
         testList();
+        testSet();
     }
 
 }

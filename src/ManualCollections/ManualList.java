@@ -7,7 +7,7 @@ class ManualList<E> implements Iterable<E> {
 
     private Element<E> first;    //Первый элемент списка
     private Element<E> last;     //Последний элемент списка
-    private int sizeList;            //Размер списка
+    private int sizeList;        //Размер списка
 
     public ManualList() {
         first = null;
@@ -97,17 +97,24 @@ class ManualList<E> implements Iterable<E> {
         if (isEmpty()) throw new IndexOutOfBoundsException();
         if ((i < 0) | (i > (size() - 1))) throw new IndexOutOfBoundsException();
         if (i == 0) {
-            sizeList--;
             return removeFirst();
         }
         if (i == (size() - 1)) {
-            sizeList--;
             return removeLast();
         }
 
-        //Вставить код удаления не начального (не конечного) элемента
-
-        return null;
+        Element<E> current=first;
+        int j=0;
+        while (j!=i){
+            j++;
+            current=current.next;
+        }
+        Element<E> n=current.next;
+        Element<E> p=current.prev;
+        p.next=n;
+        n.prev=p;
+        sizeList--;
+        return current.content;
     }
 
     //Метод возвращает первый элемент из списка, удаляя его. Если список пуст - возвращается null
