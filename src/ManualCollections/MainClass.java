@@ -135,12 +135,50 @@ public class MainClass {
     private static void testSet(){
         System.out.println("----- Тестирование множества -----");
         ManualSet<String> mss=new ManualSet<>();
-        mss.add("A");
-        mss.add("B");
-        mss.add("C");
-        mss.add("D");
-        mss.add("E");
+        mss.add("A01");
+        mss.add("15B");
+        mss.add("CX3");
+        mss.add("D36");
+        mss.add("EDR");
         System.out.println("Множество создано. Его содержимое "+mss);
+        System.out.println("Размер множества "+mss.size());
+        System.out.println();
+
+        System.out.println("Пробуем добавить во множество элементы, которые в нем уже есть \"A01\" и \"CX3\"");
+        mss.add("A01");
+        mss.add("CX3");
+        System.out.println("Множество после попытки добавления "+mss);
+        System.out.println();
+
+        System.out.println("Добавляем элемерты, которых еще нет во множестве \"RT@\" и \"R#G\"");
+        System.out.println(mss.add("RT@")?"Успешно":"Не успешно");
+        System.out.println(mss.add("R#G")?"Успешно":"Не успешно");
+        System.out.println("Обновленное множество "+mss);
+        System.out.println();
+
+        System.out.println("Попытка удалить элемент, которого нет \"F0S\" "+(mss.remove("F0S")?"Успешно":"Не успешно"));
+        System.out.println();
+
+        System.out.println("Попытка удалить элемент, который есть \"D36\" "+(mss.remove("D36")?"Успешно":"Не успешно"));
+        System.out.println("Обновленное множество "+mss);
+        System.out.println();
+
+        System.out.println("Поиск элемента во множестве");
+        System.out.println("Элемент \"R#G\" "+(mss.contains("R#G")?"найден":"не найден")+" во множестве");
+        System.out.println("Элемент \"UY*\" "+(mss.contains("UY*")?"найден":"не найден")+" во множестве");
+        System.out.println();
+
+        System.out.println("Выводим элементы множества по одному:");
+        for (String s:mss) System.out.println(s);
+        System.out.println();
+
+        System.out.println("Создаем второе множество на основе первого. Первое множество очищаем");
+        ManualSet<String> mss2=new ManualSet<>(mss);
+        mss.clear();
+        System.out.println("Первое множество "+mss);
+        System.out.println("Второе множество "+mss2);
+        System.out.println();
+
     }
 
     public static void main(String[] args) {
