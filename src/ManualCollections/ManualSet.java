@@ -22,6 +22,7 @@ public class ManualSet<E> implements Iterable<E>{
 
     //Возвращает true, если элемент удалось добавить во множество
     public boolean add(E e){
+        if(e==null)throw new NullPointerException();
         int pos=e.hashCode()%SET_POWER;
         if (s[pos].isEmpty()){
             s[pos].addLast(e);
@@ -39,6 +40,7 @@ public class ManualSet<E> implements Iterable<E>{
 
     //Возвращает true, если элемент удалось удалить из множества
     public boolean remove(E e){
+        if(e==null)throw new NullPointerException();
         int pos=e.hashCode()%SET_POWER;
         if (s[pos].isEmpty())return false;
         if (!s[pos].isEmpty()){
@@ -57,6 +59,7 @@ public class ManualSet<E> implements Iterable<E>{
 
     //Возвращает true, если множество содержит данный элемент
     public boolean contains(E e){
+        if (e==null)throw new NullPointerException();
         int pos=e.hashCode()%SET_POWER;
         if (s[pos].isEmpty())return false;
         if (!s[pos].isEmpty()){
@@ -81,7 +84,6 @@ public class ManualSet<E> implements Iterable<E>{
     public boolean isEmpty(){
         return setSize==0;
     }
-
 
     @Override
     public Iterator<E> iterator() {

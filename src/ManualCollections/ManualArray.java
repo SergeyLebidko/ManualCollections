@@ -7,15 +7,14 @@ import java.util.Iterator;
 public class ManualArray<E> implements Iterable<E>{
 
     private Object[] a;
-    private int startSize;  //Стартовый размер массива
-    private int pointer;    //Указатель на последний элемент данных
+    private final int START_SIZE = 5;    //Стартовый размер массива
+    private int pointer;                 //Указатель на последний элемент данных
 
     private final int STEP_RESIZE=10;    //Массив при необходимости будет уменьшаться или увеличиваться на данное количество элементов
 
     public ManualArray() {
-        startSize = 5;
         pointer = -1;
-        a = new Object[startSize];
+        a = new Object[START_SIZE];
     }
 
     public ManualArray(ManualArray<? extends E> array){
@@ -68,9 +67,8 @@ public class ManualArray<E> implements Iterable<E>{
 
     //Очищает массив
     public void clear(){
-        startSize = 5;
         pointer = -1;
-        a = new Object[startSize];
+        a = new Object[START_SIZE];
     }
 
     //Возвращает true, если массив пуст
