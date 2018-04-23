@@ -49,6 +49,17 @@ public class MainClass {
         System.out.println("Создаем новый массив на основе старого");
         ManualArray<String> aml2=new ManualArray<>(aml);
         System.out.println("Содержимое нового массива "+aml2);
+        System.out.println();
+
+        System.out.println("Выводим содержиомое нового массива поэлементно");
+        for (int i=0;i<aml2.size();i++) System.out.println(aml2.get(i));
+        System.out.println();
+
+        System.out.println("Поэлментно изменяем содержмое ячеек массива");
+        for (int i=0;i<aml2.size();i++)aml2.set(aml2.get(i)+"_*", i);
+        System.out.println("Новый массив"+aml2);
+        System.out.println();
+
         System.out.println("Очищаем новый массив");
         aml.clear();
         System.out.println(aml.isEmpty()?"Массив очищен":"В массиве остались элементы");
@@ -175,16 +186,34 @@ public class MainClass {
         System.out.println("Создаем второе множество на основе первого. Первое множество очищаем");
         ManualSet<String> mss2=new ManualSet<>(mss);
         mss.clear();
-        System.out.println("Первое множество "+mss);
-        System.out.println("Второе множество "+mss2);
+        System.out.println("Первое множество "+mss+" "+(mss.isEmpty()?"пусто":"не пусто"));
+        System.out.println("Второе множество "+mss2+" "+(mss2.isEmpty()?"пусто":"не пусто"));
         System.out.println();
 
+    }
+
+    private static void testMap(){
+        System.out.println("----- Тестирование ассоциативного массива -----");
+        ManualMap<String, Integer> mmp=new ManualMap<>();
+        mmp.put("AAB", 1);
+        mmp.put("ABX", 2);
+        mmp.put("GTX", 3);
+        mmp.put("RVM", 4);
+        mmp.put("JVM", 5);
+        mmp.put("TF@", 6);
+        mmp.put("C++", 7);
+        mmp.put("ADA", 8);
+        mmp.put("FAX", 9);
+        mmp.put("XYZ", 10);
+        System.out.println("Создан массив размера "+mmp.size());
+        System.out.println("Содержимое массива "+mmp);
     }
 
     public static void main(String[] args) {
         testArr();
         testList();
         testSet();
+        //testMap();
     }
 
 }
