@@ -92,6 +92,22 @@ class ManualList<E> implements Iterable<E> {
         return null;
     }
 
+    //Метод устанавливает новое значение произвольному элементу списка
+    public void set(E e, int i) {
+        if (isEmpty()) throw new IndexOutOfBoundsException();
+        if ((i < 0) | (i >= sizeList)) throw new IndexOutOfBoundsException();
+        Element<E> current = first;
+        int j = 0;
+        while (current!=null){
+            if (j==i){
+                current.content=e;
+                return;
+            }
+            j++;
+            current=current.next;
+        }
+    }
+
     //Метод возвращает произвольный элемент из списка, удаляя его. Если список пуст - возвращается null
     public E remove(int i) {
         if (isEmpty()) throw new IndexOutOfBoundsException();
@@ -103,16 +119,16 @@ class ManualList<E> implements Iterable<E> {
             return removeLast();
         }
 
-        Element<E> current=first;
-        int j=0;
-        while (j!=i){
+        Element<E> current = first;
+        int j = 0;
+        while (j != i) {
             j++;
-            current=current.next;
+            current = current.next;
         }
-        Element<E> n=current.next;
-        Element<E> p=current.prev;
-        p.next=n;
-        n.prev=p;
+        Element<E> n = current.next;
+        Element<E> p = current.prev;
+        p.next = n;
+        n.prev = p;
         sizeList--;
         return current.content;
     }

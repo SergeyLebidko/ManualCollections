@@ -5,8 +5,8 @@ import java.util.Iterator;
 //Данный класс, реализует множество
 public class ManualSet<E> implements Iterable<E>{
 
-    private final int SET_POWER=100;    //Количество элементов в массиве
-    private ManualList<E>[] s;
+    private int SET_POWER=100;          //Количество элементов в массиве
+    private ManualList<E>[] s;          //Массив связных списков
     private int setSize;
 
     public ManualSet() {

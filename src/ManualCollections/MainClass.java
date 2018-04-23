@@ -131,6 +131,15 @@ public class MainClass {
         System.out.println("Содержимое нового списка "+sml2);
         System.out.println();
 
+        System.out.println("Изменяем элемент в середине списка на \"X7X\"");
+        sml2.set("X7X",2);
+        System.out.println("Изменяем элемент в начале списка на \"JSE\"");
+        sml2.set("JSE",0);
+        System.out.println("Изменяем элемент в конце списка на \"+++\"");
+        sml2.set("+++",4);
+        System.out.println("Список после изменений "+sml2);
+        System.out.println();
+
         System.out.println("Удаляем два элемента из середины нового списка");
         sml2.remove(1);
         sml2.remove(2);
@@ -213,7 +222,7 @@ public class MainClass {
         testArr();
         testList();
         testSet();
-        //testMap();
+        testMap();
     }
 
 }
