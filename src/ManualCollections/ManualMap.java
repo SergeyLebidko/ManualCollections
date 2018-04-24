@@ -19,20 +19,21 @@ public class ManualMap<K, V> {
         }
 
         //Метод сравнивает переданную ему пару "ключ-значение", с соответствующими полями текущего объекта
-        public boolean equalsKeyAndVal(K k, V v){
+        public boolean equalsKeyAndVal(K k, V v) {
             return key.equals(k) & val.equals(v);
         }
 
     }
 
-    private int MAP_POWER = 100;                 //Начальный размер массива
-    private int sizeMap;                         //Количество ключей в массиве
-    private ManualArray<MapElement<K, V>>[] m;   //Массив связных списков
+    private int mapPower;                        //Начальный размер массива
+    private int mapSize;                         //Количество ключей в массиве
+    private ManualArray<MapElement<K, V>>[] m;   //Массив для хранения пар "ключ-значение"
 
     public ManualMap() {
-        m = new ManualArray[MAP_POWER];
-        for (int i=0;i<MAP_POWER;i++)m[i]=new ManualArray<>();
-        sizeMap = 0;
+        mapPower = 4;
+        m = new ManualArray[mapPower];
+        for (int i = 0; i < mapPower; i++) m[i] = new ManualArray<>();
+        mapSize = 0;
     }
 
     public ManualMap(ManualMap<? extends K, ? extends V> map) {
@@ -42,21 +43,25 @@ public class ManualMap<K, V> {
 
     //Метод добавляет элемент к массиву. Возвращает предыдущее значение, связанное с ключом. Если предыдущего значения не было - возвращает null
     public V put(K k, V v) {
-        if (k==null) throw new NullPointerException();
-        int pos=k.hashCode()%MAP_POWER;
-        if (m[pos].isEmpty()){
-            m[pos].add(new MapElement<>(k,v));
+        if (k == null) throw new NullPointerException();
+        int pos = k.hashCode() % mapPower;
+        if (m[pos].isEmpty()) {
+            m[pos].add(new MapElement<>(k, v));
+            mapSize++;
+            resize();
             return null;
         }
-        if (!m[pos].isEmpty()){
-            for (int i=0;i<m[pos].size();i++){
-                if (m[pos].get(i).equalsKey(k)){
-                    V vtmp=m[pos].get(i).val;
-                    m[pos].set(new MapElement<>(k,v),i);
+        if (!m[pos].isEmpty()) {
+            for (int i = 0; i < m[pos].size(); i++) {
+                if (m[pos].get(i).equalsKey(k)) {
+                    V vtmp = m[pos].get(i).val;
+                    m[pos].set(new MapElement<>(k, v), i);
                     return vtmp;
                 }
             }
-            m[pos].add(new MapElement<>(k,v));
+            m[pos].add(new MapElement<>(k, v));
+            mapSize++;
+            resize();
         }
         return null;
     }
@@ -98,24 +103,53 @@ public class ManualMap<K, V> {
 
     //Возвращает количество элементов в массиве
     public int size() {
-        return sizeMap;
+        return mapSize;
+    }
+
+    //Возвращает true, если массив пуст
+    public boolean isEmpty() {
+        return (mapSize == 0);
     }
 
     //Очищает массив
     public void clear() {
+        mapPower = 4;
+        m = new ManualArray[mapPower];
+        for (int i = 0; i < mapPower; i++) m[i] = new ManualArray<>();
+        mapSize = 0;
+    }
 
+    //Метод производит перехэширование в зависимости от коэффициента заполнения хэш-массива
+    private void resize() {
+        if (isEmpty()) return;
+        double k = (double) mapSize / (double) mapPower;
+        if ((k>=0.2) & (k<0.75))return;
+
+        //Создаем новый массив и уже имеющиеся во элементы переносим в него
+        int newMapPower= mapSize*2;
+        ManualArray<MapElement<K,V>>[] m1=new ManualArray[newMapPower];
+        int pos;
+        for (int i=0;i<newMapPower;i++)m1[i]=new ManualArray<>();
+        for (int i=0;i<mapPower;i++){
+            for (int j=0;j<m[i].size();j++){
+                pos=m[i].get(j).hashCode()%newMapPower;
+                m1[pos].add(m[i].get(j));
+            }
+        }
+        m=m1;
+        mapPower=newMapPower;
     }
 
     @Override
     public String toString() {
-        String str="[";
-        for (int i=0;i<MAP_POWER;i++){
-            if (m[i].isEmpty())continue;
-            for (int j=0;j<m[i].size();j++){
-                str+=" ("+m[i].get(j).key+"="+m[i].get(j).val+")";
+        String str = "[";
+        for (int i = 0; i < mapPower; i++) {
+            if (m[i].isEmpty()) continue;
+            for (int j = 0; j < m[i].size(); j++) {
+                str += " (" + m[i].get(j).key + "=" + m[i].get(j).val + ")";
             }
         }
-        str+=" ]";
+        str += " ]";
         return str;
     }
 
