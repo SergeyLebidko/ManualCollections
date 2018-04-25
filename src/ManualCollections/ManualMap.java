@@ -13,16 +13,6 @@ public class ManualMap<K, V> {
             this.val = val;
         }
 
-        //Метод сравнивает переданный ему ключ со значением ключа из текущего объекта
-        public boolean equalsKey(K k) {
-            return key.equals(k);
-        }
-
-        //Метод сравнивает переданную ему пару "ключ-значение", с соответствующими полями текущего объекта
-        public boolean equalsKeyAndVal(K k, V v) {
-            return key.equals(k) & val.equals(v);
-        }
-
     }
 
     private int mapPower;                        //Начальный размер массива
@@ -53,7 +43,7 @@ public class ManualMap<K, V> {
         }
         if (!m[pos].isEmpty()) {
             for (int i = 0; i < m[pos].size(); i++) {
-                if (m[pos].get(i).equalsKey(k)) {
+                if (m[pos].get(i).key.equals(k)) {
                     V vtmp = m[pos].get(i).val;
                     m[pos].set(new MapElement<>(k, v), i);
                     return vtmp;
@@ -68,36 +58,91 @@ public class ManualMap<K, V> {
 
     //Метод возвращает элемент, связанный с ключом k. Если такого элемента нет - возвращает null
     public V get(Object k) {
+        if (k==null)throw new NullPointerException();
+        int pos=k.hashCode()%mapPower;
+        if (m[pos].isEmpty())return null;
+        for (int i=0;i<m[pos].size();i++){
+            if (m[pos].get(i).key.equals(k)){
+                return m[pos].get(i).val;
+            }
+        }
         return null;
     }
 
     //Удаляет пару ключ-значение соответствующую ключу k, возвращает значение v
     public V remove(K k) {
+        if (k==null)throw new NullPointerException();
+        int pos=k.hashCode()%mapPower;
+        if (m[pos].isEmpty())return null;
+        for (int i=0;i<m[pos].size();i++){
+            if (m[pos].get(i).key.equals(k)){
+                V vtmp=m[pos].get(i).val;
+                m[pos].remove(i);
+                return vtmp;
+            }
+        }
         return null;
     }
 
     //Удаляет пару ключ-значение соответствующую ключу k и значению v, возвращает true, если данная операция прошла успешно
     public boolean remove(K k, V v) {
+        if (k==null)throw new NullPointerException();
+        int pos=k.hashCode()%mapPower;
+        if (m[pos].isEmpty())return false;
+        for (int i=0;i<m[pos].size();i++){
+            if (m[pos].get(i).key.equals(k) & m[pos].get(i).val.equals(v)){
+                m[pos].remove(i);
+                return true;
+            }
+        }
         return false;
     }
 
     //Возвращает множество ключей
     public ManualSet<K> keySet() {
-        return null;
+        ManualSet<K> set=new ManualSet<>();
+        for (int i=0;i<mapPower;i++){
+            if (m[i].isEmpty())continue;
+            for (int j=0;j<m[i].size();j++){
+                set.add(m[i].get(j).key);
+            }
+        }
+        return set;
     }
 
     //Возвращает массив значений, связанных с ключами
     public ManualArray<V> valsArray() {
-        return null;
+        ManualArray<V> array=new ManualArray<>();
+        for (int i=0;i<mapPower;i++){
+            if (m[i].isEmpty())continue;
+            for (int j=0;j<m[i].size();j++){
+                array.add(m[i].get(j).val);
+            }
+        }
+        return array;
     }
 
     //Равен true, если массив содержит ключ k
     public boolean containsKey(Object k) {
+        if (k==null)throw new NullPointerException();
+        for (int i=0;i<mapPower;i++){
+            if (m[i].isEmpty())continue;
+            for (int j=0;j<m[i].size();j++){
+                if (m[i].get(j).key.equals(k))return true;
+            }
+        }
         return false;
     }
 
     //Равен true, если массив содержит значение v
     public boolean containsValue(Object v) {
+        if (v==null)throw new NullPointerException();
+        for (int i=0;i<mapPower;i++){
+            if (m[i].isEmpty())continue;
+            for (int j=0;j<m[i].size();j++){
+                if (m[i].get(j).key.equals(v))return true;
+            }
+        }
         return false;
     }
 
