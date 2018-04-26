@@ -140,7 +140,7 @@ public class ManualMap<K, V> {
         for (int i=0;i<mapPower;i++){
             if (m[i].isEmpty())continue;
             for (int j=0;j<m[i].size();j++){
-                if (m[i].get(j).key.equals(v))return true;
+                if (m[i].get(j).val.equals(v))return true;
             }
         }
         return false;
@@ -177,7 +177,7 @@ public class ManualMap<K, V> {
         for (int i=0;i<newMapPower;i++)m1[i]=new ManualArray<>();
         for (int i=0;i<mapPower;i++){
             for (int j=0;j<m[i].size();j++){
-                pos=m[i].get(j).hashCode()%newMapPower;
+                pos=m[i].get(j).key.hashCode()%newMapPower;
                 m1[pos].add(m[i].get(j));
             }
         }

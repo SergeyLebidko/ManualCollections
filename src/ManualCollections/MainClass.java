@@ -216,6 +216,57 @@ public class MainClass {
         mmp.put("XYZ", 10);
         System.out.println("Создан массив размера "+mmp.size());
         System.out.println("Содержимое массива "+mmp);
+        System.out.println();
+
+        System.out.println("Получаем элементы");
+        System.out.println("GTX = "+mmp.get("GTX"));
+        System.out.println("C++ = "+mmp.get("C++"));
+        System.out.println("Попытка получить элемент, которого нет. HDD = "+(mmp.get("HDD")==null?"null":"значение получено успешно"));
+        System.out.println();
+
+        System.out.println("Заменяем элементы методом put");
+        System.out.println("Старое значение TF@ = "+mmp.put("TF@", 1006));
+        System.out.println("Старое знаечние FAX = "+mmp.put("FAX", 1009));
+        System.out.println("Обновленный массив "+mmp);
+        System.out.println();
+
+        System.out.println("Удаляем значения по ключу");
+        System.out.println("Удаляем значение ABX = "+mmp.remove("ABX"));
+        System.out.println("Удаляем значение AAB = "+mmp.remove("AAB"));
+        System.out.println("Обновленный массив "+mmp);
+        System.out.println();
+
+        System.out.println("Удаляем пары значений");
+        System.out.println("Удаляем RVM=4: "+(mmp.remove("RVM",4)?"Успешно":"Не успешно"));
+        System.out.println("Удаляем ADA=8: "+(mmp.remove("ADA",8)?"Успешно":"Не успешно"));
+        System.out.println("Попытка удалить не существующее значение PPP=15 "+(mmp.remove("PPP",15)?"Успешно":"Не успешно"));
+        System.out.println("Обновленный массив "+mmp);
+        System.out.println();
+
+        System.out.println("Множество ключей "+mmp.keySet());
+        System.out.println("Массив значений "+mmp.valsArray());
+        System.out.println();
+
+        System.out.println("Массив содержит ключ C++ - "+(mmp.containsKey("C++")?"да":"нет"));
+        System.out.println("Массив содержит значение 1009 - "+(mmp.containsValue(1009)?"да":"нет"));
+        System.out.println("Массив содержит ключ FFF - "+(mmp.containsKey("FFF")?"да":"нет"));
+        System.out.println("Массив содержит значение 24 - "+(mmp.containsValue(24)?"да":"нет"));
+        System.out.println();
+
+        System.out.println("Количество пар в массиве "+mmp.size());
+        System.out.println();
+
+        System.out.println("Создаем новый массив на основе старого");
+        ManualMap<String, Integer> mmp2=new ManualMap<>(mmp);
+        System.out.println("Старый массив "+mmp);
+        System.out.println("Новый массив "+mmp2);
+        System.out.println();
+
+        System.out.println("Очищаем старый массив");
+        mmp.clear();
+        System.out.println("Старый массив пуст - "+(mmp.isEmpty()?"да":"нет"));
+        System.out.println();
+
     }
 
     public static void main(String[] args) {
